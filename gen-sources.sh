@@ -4,7 +4,7 @@
 VER="1.0.2"
 ##########################
 
-set -e
+set -ex
 
 GIT_URL="https://github.com/wirow-io/wirow-server.git"
 SOURCE_NAME="wirow-${VER}"
