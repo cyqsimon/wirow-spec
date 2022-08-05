@@ -16,10 +16,14 @@ SPEC_NAME="wirow.spec"
 cd $(dirname "$0")
 
 # clone
-git clone --recurse-submodules "${GIT_URL}" "${SOURCE_NAME}"
+git clone "${GIT_URL}" "${SOURCE_NAME}"
 
-# switch to tagged version
 pushd "${SOURCE_NAME}"
+# replace ffmpeg source with Github mirror for speed
+git submodule set-url "extra/ffmpeg" "https://github.com/FFmpeg/FFmpeg.git"
+# pull submodules
+git submodule update --init --recursive
+# switch to tagged version
 git checkout "${TAG}"
 popd
 
