@@ -63,8 +63,7 @@ npm install --global yarn
 mkdir build && cd build
 cmake ..    -G Ninja \
             -D CMAKE_BUILD_TYPE=RelWithDebInfo \
-            -D IW_EXEC=ON \
-            -D BUILD_TESTS=ON
+            -D IW_EXEC=ON
 ninja
 
 %install
