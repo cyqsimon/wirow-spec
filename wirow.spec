@@ -9,7 +9,7 @@ Summary:        A full featured self-hosted video web-conferencing platform
 
 License:        AGPLv3
 URL:            https://github.com/wirow-io/wirow-server
-Source0:        https://github.com/wirow-io/wirow-server/archive/v%{version}.tar.gz
+Source0:        v%{version}.tar.gz
 
 Requires:       ffmpeg
 # EL8 ships with gcc-8.5.0
@@ -41,7 +41,7 @@ A full featured self-hosted video web-conferencing platform shipped as a single 
 - Low memory/CPU consumption due to fast core engine written in C.
 
 %prep
-%autosetup -n %{_prj_name}-%{version}
+%autosetup
 
 # install yarn with npm
 %if 0%{?el8}
