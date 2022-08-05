@@ -1,5 +1,6 @@
 %global debug_package %{nil}
 %global _prj_name wirow-server
+%global _npm_prefix ~/.npm-global
 
 Name:           wirow
 Version:        1.0.2
@@ -11,14 +12,19 @@ URL:            https://github.com/wirow-io/wirow-server
 Source0:        https://github.com/wirow-io/wirow-server/archive/v%{version}.tar.gz
 
 Requires:       ffmpeg
-%if 0%{?el8}
 # EL8 ships with gcc-8.5.0
+%if 0%{?el8}
 BuildRequires:  gcc-toolset-11
 %else
 BuildRequires:  gcc > 9
 %endif
 BuildRequires:  cmake >= 3.18
-BuildRequires:  nodejs >= 16
+# EL8 doesn't ship yarnpkg so we need to install it with npm
+%if 0%{?el8}
+BuildRequires:  nodejs >= 1:16
+%else
+BuildRequires:  yarnpkg
+%endif
 BuildRequires:  autoconf automake git libtool make ninja-build python3-pip yasm
 
 %description
@@ -35,12 +41,21 @@ A full featured self-hosted video web-conferencing platform shipped as a single 
 %prep
 %autosetup -n %{_prj_name}-%{version}
 
+# install yarn with npm
+%if 0%{?el8}
+# sidestep permission issues with writing to /usr/local/
+mkdir -p %{_npm_prefix}
+npm config set prefix '%{_npm_prefix}'
+
 npm install --global yarn
+%endif
 
 %build
 %if 0%{?el8}
     # better than 'scl enable' because it's not spawning a new shell
     source /opt/rh/gcc-toolset-11/enable
+
+    export PATH=%{_npm_prefix}/bin:$PATH
 %endif
 
 cmake ..    -G Ninja \
