@@ -18,10 +18,9 @@ cd $(dirname "$0")
 # clone
 git clone --recurse-submodules "${GIT_URL}" "${SOURCE_NAME}"
 
-# switch to tagged version, then remove VCS info
+# switch to tagged version
 pushd "${SOURCE_NAME}"
 git checkout "${TAG}"
-rm -rf .git
 popd
 
 # generate archive
