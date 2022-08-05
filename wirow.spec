@@ -58,6 +58,7 @@ npm install --global yarn
     export PATH=%{_npm_prefix}/bin:$PATH
 %endif
 
+mkdir build && cd build
 cmake ..    -G Ninja \
             -D CMAKE_BUILD_TYPE=RelWithDebInfo \
             -D IW_EXEC=ON \
