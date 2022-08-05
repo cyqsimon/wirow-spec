@@ -25,7 +25,7 @@ BuildRequires:  nodejs >= 1:16
 %if 0%{?el8}
 BuildRequires:  npm
 %else
-BuildRequires:  yarnpkg
+BuildRequires:  yarnpkg >= 1.22
 %endif
 BuildRequires:  autoconf automake git libtool make ninja-build python3-pip yasm
 
