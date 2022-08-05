@@ -20,9 +20,9 @@ BuildRequires:  gcc >= 9
 BuildRequires:  gcc-c++ >= 9
 %endif
 BuildRequires:  cmake >= 3.18
+BuildRequires:  nodejs >= 1:16
 # EL8 doesn't ship yarnpkg so we need to install it with npm
 %if 0%{?el8}
-BuildRequires:  nodejs >= 1:16
 BuildRequires:  npm
 %else
 BuildRequires:  yarnpkg
